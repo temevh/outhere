@@ -45,7 +45,7 @@ class MainText extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: Color.fromARGB(255, 119, 115, 115)),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
         ],
       ),
     );
