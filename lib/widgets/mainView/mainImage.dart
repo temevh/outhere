@@ -7,7 +7,7 @@ class MainImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/images/talking.png',
-      height: 360,
+      height: 320,
     );
   }
 }
