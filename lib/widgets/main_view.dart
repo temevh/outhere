@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:outhere/widgets/mainView/mainImage.dart';
-import 'package:outhere/widgets/mainView/mainText.dart';
-import 'package:outhere/widgets/mainView/mainButtons.dart';
+import 'package:outhere/widgets/mainView/main_image.dart';
+import 'package:outhere/widgets/mainView/main_text.dart';
+import 'package:outhere/widgets/mainView/main_buttons.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
