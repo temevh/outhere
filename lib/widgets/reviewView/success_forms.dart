@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,13 +36,13 @@ class _SuccessFormState extends State<SuccessForm> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     // * Editing Controller
     final TextEditingController firstNameController = TextEditingController();
 
     return Center(
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           children: [
             Padding(
@@ -63,6 +65,7 @@ class _SuccessFormState extends State<SuccessForm> {
               min: 0,
               max: 10,
               divisions: 5,
+              activeColor: const Color.fromARGB(255, 51, 103, 151),
               label: sliderLabels[_currentDoSliderValue] ??
                   _currentDoSliderValue.toString(),
               onChanged: (double value) {
@@ -76,7 +79,7 @@ class _SuccessFormState extends State<SuccessForm> {
               child: Center(
                 child: Text(
                   "How did you feel when doing the task?",
-                  textAlign: TextAlign.center, // Align text in the center
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
                     textStyle: Theme.of(context).textTheme.displayLarge,
                     fontSize: 26,
@@ -91,6 +94,7 @@ class _SuccessFormState extends State<SuccessForm> {
               min: 0,
               max: 10,
               divisions: 5,
+              activeColor: const Color.fromARGB(255, 51, 103, 151),
               label: sliderLabels2[_currentFeelSliderValue] ??
                   _currentFeelSliderValue.toString(),
               onChanged: (double value) {
@@ -121,6 +125,7 @@ class _SuccessFormState extends State<SuccessForm> {
                         firstNameController.text = value!;
                       },
                       textInputAction: TextInputAction.done,
+                      style: const TextStyle(color: Colors.white),
                     )
                   ],
                 ),
@@ -162,9 +167,10 @@ class _SuccessFormState extends State<SuccessForm> {
                   print(_currentFeelSliderValue);
                   print(_writtenPart);
                   print(_likedTask);
+                  Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 233, 181, 25)),
+                    backgroundColor: const Color.fromARGB(255, 51, 103, 151)),
                 child: Text(
                   "Submit",
                   style: GoogleFonts.comfortaa(

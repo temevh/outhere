@@ -29,6 +29,7 @@ class _ReviewViewState extends State<ReviewView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
       body: Center(
         child: Column(children: [
@@ -44,7 +45,7 @@ class _ReviewViewState extends State<ReviewView> {
             ),
           ),
           //const ReviewForms(),
-          widget.success ? SuccessForm() : FailureForm(),
+          widget.success ? const SuccessForm() : const FailureForm(),
         ]),
       ),
     );

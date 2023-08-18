@@ -10,6 +10,6 @@ class FailureForm extends StatefulWidget {
 class _FailureFormState extends State<FailureForm> {
   @override
   Widget build(BuildContext context) {
-    return Text("FAILURE VIEW");
+    return const Text("FAILURE VIEW");
   }
 }
