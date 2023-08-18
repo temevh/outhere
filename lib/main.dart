@@ -3,8 +3,6 @@ import 'package:outhere/widgets/outhere.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: Outhere(),
-    ),
+    const MaterialApp(home: Outhere(), debugShowCheckedModeBanner: false),
   );
 }

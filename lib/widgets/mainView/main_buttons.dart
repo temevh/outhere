@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:outhere/widgets/reviewView/review_view.dart';
 
 class MainButtons extends StatefulWidget {
   const MainButtons({super.key});
@@ -33,9 +34,19 @@ class _MainButtonsState extends State<MainButtons> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildButton(context, "Yes I did!", Colors.green, () {}),
+        _buildButton(context, "Yes I did!", Colors.green, () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ReviewView(success: true)));
+        }),
         const SizedBox(width: 20),
-        _buildButton(context, "Not yet...", Colors.red, () {}),
+        _buildButton(context, "Not yet...", Colors.red, () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ReviewView(success: false)));
+        }),
       ],
     );
   }
