@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:outhere/widgets/reviewView/failure_forms.dart';
 
-import 'package:outhere/widgets/reviewView/review_forms.dart';
+import 'package:outhere/widgets/reviewView/success_forms.dart';
 
 class ReviewView extends StatefulWidget {
-  const ReviewView({Key? key, required this.success}) : super(key: key);
+  const ReviewView({
+    Key? key,
+    required this.success,
+  }) : super(key: key);
   final bool success;
 
   @override
@@ -39,7 +43,8 @@ class _ReviewViewState extends State<ReviewView> {
               color: Colors.white,
             ),
           ),
-          const ReviewForms(),
+          //const ReviewForms(),
+          widget.success ? SuccessForm() : FailureForm(),
         ]),
       ),
     );
