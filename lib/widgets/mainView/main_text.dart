@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'dart:math';
 
 import 'package:outhere/data/tasks.dart';
 
 final formatter = DateFormat('dd/MM/yyyy');
 final todaysDate = formatter.format(DateTime.now());
 
-var rng = Random();
-
 class MainText extends StatelessWidget {
-  const MainText({super.key});
+  final int indexNumber;
+  final int amountNumber;
+
+  const MainText(
+      {Key? key, required this.indexNumber, required this.amountNumber})
+      : super(key: key);
 
   Widget _buildHeading(BuildContext context, String text, Color color) {
     return Text(
@@ -40,15 +42,10 @@ class MainText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Task firstTask =
-        tasks.isNotEmpty ? tasks.first : Task(name: '', category: '');
-    var taskTitle = firstTask.name;
-    var categoryString = firstTask.category;
+    var selectedTask = tasks[indexNumber];
 
-    var numberOfPeople = rng.nextInt(4) + 1;
-
-    var dynamicTaskTitle = taskTitle.replaceFirst('x', '$numberOfPeople');
-
+    var dynamicTaskTitle = selectedTask.name.replaceFirst('x', '$amountNumber');
+    var categoryString = selectedTask.category;
     return SizedBox(
       width: 350,
       child: Container(
