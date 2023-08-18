@@ -35,19 +35,33 @@ class _MainButtonsState extends State<MainButtons> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildButton(context, "Yes I did!", Colors.green, () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ReviewView(success: true)));
+          Navigator.push(context, _createRoute(true));
         }),
         const SizedBox(width: 20),
         _buildButton(context, "Not yet...", Colors.red, () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ReviewView(success: false)));
+          Navigator.push(context, _createRoute(false));
         }),
       ],
+    );
+  }
+
+  Route _createRoute(bool successParam) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          ReviewView(success: successParam),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }
