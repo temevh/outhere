@@ -9,11 +9,11 @@ class FailureForm extends StatefulWidget {
 }
 
 class _FailureFormState extends State<FailureForm> {
-  String? _selectedReason = "";
-  String? _writtenPart = "";
-  bool _likedTask = false;
+  final String _selectedReason = "";
+  final String _writtenPart = "";
+  final bool _likedTask = false;
 
-  List<String> reasons = <String>[
+  List<String> list = <String>[
     "Was too hard",
     "Didn't have time",
     "Felt uncomfortable",
@@ -23,7 +23,7 @@ class _FailureFormState extends State<FailureForm> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     final TextEditingController firstNameController = TextEditingController();
-    String dropdownValue = reasons.first;
+    String dropdownValue = list.first;
 
     return Center(
       child: Form(
@@ -46,7 +46,7 @@ class _FailureFormState extends State<FailureForm> {
                       dropdownValue = value!;
                     });
                   },
-                  items: reasons.map<DropdownMenuItem<String>>((String value) {
+                  items: list.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
