@@ -9,6 +9,8 @@ import 'package:outhere/widgets/mainView/main_buttons.dart';
 
 var rng = Random();
 
+var completed = false;
+
 class MainView extends StatefulWidget {
   const MainView({super.key});
 
