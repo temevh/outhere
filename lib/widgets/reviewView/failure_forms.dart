@@ -18,10 +18,9 @@ List<String> list = <String>[
 ];
 
 class _FailureFormState extends State<FailureForm> {
-  final String _selectedReason = "";
-  final String _writtenPart = "";
-  bool _likedTask = false;
-
+  String _selectedReason = ""; // Initialize here
+  String _writtenPart = ""; // Initialize here
+  bool _retryTask = false; // Initialize here
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
@@ -47,23 +46,34 @@ class _FailureFormState extends State<FailureForm> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                const ReasonDropDown(),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
+                ReasonDropDown(
+                  onReasonSelected: (value) {
+                    setState(() {
+                      _selectedReason = value;
+                    });
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 51, 103, 151)),
-                  child: Text(
-                    "Submit",
-                    style: GoogleFonts.comfortaa(
-                      textStyle: Theme.of(context).textTheme.displayLarge,
-                      fontSize: 40,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  "How could you ensure that you succeed next time?",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.comfortaa(
+                    textStyle: Theme.of(context).textTheme.displayLarge,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
                   ),
                 ),
+                TextFormField(
+                  controller: firstNameController,
+                  keyboardType: TextInputType.name,
+                  onSaved: (value) {
+                    firstNameController.text = value!;
+                  },
+                  textInputAction: TextInputAction.done,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 60),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -81,14 +91,34 @@ class _FailureFormState extends State<FailureForm> {
                       ),
                     ),
                     Checkbox(
-                      value: _likedTask,
+                      value: _retryTask,
                       onChanged: (bool? value) {
                         setState(() {
-                          _likedTask = value ?? false;
+                          _retryTask = value ?? false;
                         });
                       },
                     ),
                   ],
+                ),
+                const SizedBox(height: 180),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    print(_selectedReason);
+                    _writtenPart = firstNameController.text;
+                    print(_retryTask);
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 51, 103, 151)),
+                  child: Text(
+                    "Submit",
+                    style: GoogleFonts.comfortaa(
+                      textStyle: Theme.of(context).textTheme.displayLarge,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -100,7 +130,12 @@ class _FailureFormState extends State<FailureForm> {
 }
 
 class ReasonDropDown extends StatefulWidget {
-  const ReasonDropDown({super.key});
+  final ValueChanged<String> onReasonSelected;
+
+  const ReasonDropDown({
+    Key? key,
+    required this.onReasonSelected,
+  }) : super(key: key);
 
   @override
   State<ReasonDropDown> createState() => _ReasonDropDownState();
@@ -121,6 +156,7 @@ class _ReasonDropDownState extends State<ReasonDropDown> {
         onSelected: (String? value) {
           setState(() {
             dropdownValue = value!;
+            widget.onReasonSelected(value!);
           });
         },
         dropdownMenuEntries:

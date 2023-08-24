@@ -44,7 +44,6 @@ class _ReviewViewState extends State<ReviewView> {
               color: Colors.white,
             ),
           ),
-          //const ReviewForms(),
           widget.success ? const SuccessForm() : const FailureForm(),
         ]),
       ),
