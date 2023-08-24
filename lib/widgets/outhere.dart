@@ -12,21 +12,18 @@ class Outhere extends StatefulWidget {
 }
 
 class _OuthereState extends State<Outhere> {
-  late String message;
-
   @override
   Widget build(BuildContext context) {
     final appContext = Provider.of<AppContext>(context);
 
     Color bgColor = appContext.completed
-        ? Colors.green
+        ? Color.fromARGB(255, 73, 156, 100)
         : const Color.fromARGB(255, 43, 40, 40);
-    message = appContext.completed ? "Congratulations!" : "Maybe next time!";
 
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: const Color.fromARGB(255, 43, 40, 40),
       appBar: AppBar(
-        backgroundColor: bgColor,
+        backgroundColor: const Color.fromARGB(255, 43, 40, 40),
         elevation: 1,
         title: Center(
           child: Text(

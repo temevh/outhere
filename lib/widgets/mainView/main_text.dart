@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:outhere/data/context.dart';
 
 import 'package:outhere/data/tasks.dart';
 
@@ -42,16 +44,21 @@ class MainText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appContext = Provider.of<AppContext>(context, listen: false);
     var selectedTask = tasks[indexNumber];
 
     var dynamicTaskTitle = selectedTask.name.replaceFirst('x', '$amountNumber');
     var categoryString = selectedTask.category;
+
+    Color bgColor = appContext.completed
+        ? Colors.green
+        : const Color.fromARGB(255, 59, 59, 59);
     return SizedBox(
       width: 350,
       child: Container(
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 59, 59, 59),
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         child: Column(
           children: [
