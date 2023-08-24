@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:outhere/data/context.dart';
 
 class FailureForm extends StatefulWidget {
   const FailureForm({super.key});
@@ -18,14 +20,14 @@ List<String> list = <String>[
 ];
 
 class _FailureFormState extends State<FailureForm> {
-  String _selectedReason = ""; // Initialize here
-  String _writtenPart = ""; // Initialize here
-  bool _retryTask = false; // Initialize here
+  String _selectedReason = "";
+  String _writtenPart = "";
+  bool _retryTask = false;
   @override
   Widget build(BuildContext context) {
+    final appContext = Provider.of<AppContext>(context, listen: false);
     final formKey = GlobalKey<FormState>();
     final TextEditingController firstNameController = TextEditingController();
-    String dropdownValue = list.first;
 
     return Center(
       child: Form(
@@ -107,6 +109,7 @@ class _FailureFormState extends State<FailureForm> {
                     print(_selectedReason);
                     _writtenPart = firstNameController.text;
                     print(_retryTask);
+                    appContext.completed = false;
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 51, 103, 151)),

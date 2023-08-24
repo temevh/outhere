@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:outhere/data/context.dart';
+import 'package:provider/provider.dart';
 
 class SuccessForm extends StatefulWidget {
   const SuccessForm({Key? key}) : super(key: key);
@@ -38,6 +40,7 @@ class _SuccessFormState extends State<SuccessForm> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     final TextEditingController firstNameController = TextEditingController();
+    final appContext = Provider.of<AppContext>(context, listen: false);
 
     return Center(
       child: Form(
@@ -162,10 +165,11 @@ class _SuccessFormState extends State<SuccessForm> {
               child: TextButton(
                 onPressed: () {
                   _writtenPart = firstNameController.text;
-                  print(_currentDoSliderValue);
-                  print(_currentFeelSliderValue);
-                  print(_writtenPart);
-                  print(_likedTask);
+                  //print(_currentDoSliderValue);
+                  //print(_currentFeelSliderValue);
+                  //print(_writtenPart);
+                  //print(_likedTask);
+                  appContext.completed = true;
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
