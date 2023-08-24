@@ -170,6 +170,7 @@ class _SuccessFormState extends State<SuccessForm> {
                   //print(_writtenPart);
                   //print(_likedTask);
                   appContext.completed = true;
+                  print(appContext.completed);
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(

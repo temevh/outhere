@@ -105,11 +105,10 @@ class _FailureFormState extends State<FailureForm> {
                 const SizedBox(height: 180),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
-                    print(_selectedReason);
                     _writtenPart = firstNameController.text;
-                    print(_retryTask);
                     appContext.completed = false;
+                    print(appContext.completed);
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 51, 103, 151)),

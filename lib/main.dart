@@ -6,8 +6,8 @@ import 'package:outhere/data/context.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => AppContext(),
+    ChangeNotifierProvider.value(
+      value: AppContext(),
       child: const MyApp(),
     ),
   );
