@@ -68,6 +68,15 @@ class _MyWidgetState extends State<MainView> {
                   fontWeight: FontWeight.w700,
                   color: Colors.white),
             ),
+            const SizedBox(height: 25),
+            Text(
+              'Come back tomorrow!',
+              style: GoogleFonts.comfortaa(
+                  textStyle: Theme.of(context).textTheme.displayLarge,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white),
+            ),
           ],
         ),
       );
