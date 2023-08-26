@@ -1,10 +1,9 @@
-// Copyright 2019 Aleksander Woźniak
-// SPDX-License-Identifier: Apache-2.0
-
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarView extends StatefulWidget {
+  const CalendarView({super.key});
+
   @override
   _CalendarViewState createState() => _CalendarViewState();
 }
@@ -15,9 +14,21 @@ class _CalendarViewState extends State<CalendarView> {
   DateTime? _selectedDay;
 
   List<DateTime> selectedDates = [
+    DateTime(2023, 8, 1),
+    DateTime(2023, 8, 2),
+    DateTime(2023, 8, 3),
+    DateTime(2023, 8, 6),
+    DateTime(2023, 8, 7),
+    DateTime(2023, 8, 10),
+    DateTime(2023, 8, 11),
+    DateTime(2023, 8, 12),
+    DateTime(2023, 8, 13),
+    DateTime(2023, 8, 14),
+    DateTime(2023, 8, 18),
+    DateTime(2023, 8, 19),
+    DateTime(2023, 8, 22),
     DateTime(2023, 8, 24),
     DateTime(2023, 8, 25),
-    DateTime(2023, 8, 26),
   ];
 
   bool isSelected(DateTime day) {
@@ -33,14 +44,21 @@ class _CalendarViewState extends State<CalendarView> {
           titleCentered: true,
           formatButtonVisible: false,
           titleTextStyle: TextStyle(
-            fontSize: 24,
+            fontSize: 26,
             fontWeight: FontWeight.bold,
             color: Colors.white,
+          ),
+          leftChevronIcon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.grey,
+          ),
+          rightChevronIcon: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.grey,
           ),
         ),
         calendarStyle: const CalendarStyle(
           todayDecoration: BoxDecoration(
-            color: Colors.red,
             shape: BoxShape.circle,
           ),
           selectedDecoration: BoxDecoration(
@@ -50,7 +68,7 @@ class _CalendarViewState extends State<CalendarView> {
         ),
         startingDayOfWeek: StartingDayOfWeek.monday,
         firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 3, 14),
+        lastDay: DateTime.utc(2040, 3, 14),
         focusedDay: _focusedDay,
         calendarFormat: _calendarFormat,
         selectedDayPredicate: (day) {
@@ -76,9 +94,28 @@ class _CalendarViewState extends State<CalendarView> {
         },
         calendarBuilders: CalendarBuilders(
           defaultBuilder: (context, day, focusedDay) {
-            if (!isSelected(day)) {
+            final now = DateTime.now();
+            final today = DateTime(now.year, now.month, now.day);
+            if (isSelected(day)) {
               return Container(
-                margin: const EdgeInsets.all(4),
+                margin: const EdgeInsets.all(4.5),
+                decoration: const BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Text(
+                    day.day.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              );
+            } else if (day.isBefore(today)) {
+              return Container(
+                margin: const EdgeInsets.all(4.5),
                 decoration: const BoxDecoration(
                   color: Colors.red,
                   shape: BoxShape.circle,
@@ -88,13 +125,24 @@ class _CalendarViewState extends State<CalendarView> {
                     day.day.toString(),
                     style: const TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
                 ),
               );
             } else {
-              return null;
+              return Container(
+                margin: const EdgeInsets.all(4.5),
+                child: Center(
+                  child: Text(
+                    day.day.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              );
             }
           },
         ),
