@@ -14,29 +14,50 @@ class _CalendarViewState extends State<CalendarView> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
+  List<DateTime> selectedDates = [
+    DateTime(2023, 8, 24),
+    DateTime(2023, 8, 25),
+    DateTime(2023, 8, 26),
+  ];
+
+  bool isSelected(DateTime day) {
+    return selectedDates.any((date) => isSameDay(date, day));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('TableCalendar - Basics'),
-      ),
+      backgroundColor: const Color.fromARGB(255, 43, 40, 40),
       body: TableCalendar(
+        headerStyle: const HeaderStyle(
+          titleCentered: true,
+          formatButtonVisible: false,
+          titleTextStyle: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        calendarStyle: const CalendarStyle(
+          todayDecoration: BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
+          ),
+          selectedDecoration: BoxDecoration(
+            color: Colors.green,
+            shape: BoxShape.circle,
+          ),
+        ),
         startingDayOfWeek: StartingDayOfWeek.monday,
         firstDay: DateTime.utc(2010, 10, 16),
         lastDay: DateTime.utc(2030, 3, 14),
         focusedDay: _focusedDay,
         calendarFormat: _calendarFormat,
         selectedDayPredicate: (day) {
-          // Use `selectedDayPredicate` to determine which day is currently selected.
-          // If this returns true, then `day` will be marked as selected.
-
-          // Using `isSameDay` is recommended to disregard
-          // the time-part of compared DateTime objects.
-          return isSameDay(_selectedDay, day);
+          return isSelected(day);
         },
         onDaySelected: (selectedDay, focusedDay) {
           if (!isSameDay(_selectedDay, selectedDay)) {
-            // Call `setState()` when updating the selected day
             setState(() {
               _selectedDay = selectedDay;
               _focusedDay = focusedDay;
@@ -45,16 +66,38 @@ class _CalendarViewState extends State<CalendarView> {
         },
         onFormatChanged: (format) {
           if (_calendarFormat != format) {
-            // Call `setState()` when updating calendar format
             setState(() {
               _calendarFormat = format;
             });
           }
         },
         onPageChanged: (focusedDay) {
-          // No need to call `setState()` here
           _focusedDay = focusedDay;
         },
+        calendarBuilders: CalendarBuilders(
+          defaultBuilder: (context, day, focusedDay) {
+            if (!isSelected(day)) {
+              return Container(
+                margin: const EdgeInsets.all(4),
+                decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Text(
+                    day.day.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return null;
+            }
+          },
+        ),
       ),
     );
   }
